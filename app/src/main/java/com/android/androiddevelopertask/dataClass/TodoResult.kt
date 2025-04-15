@@ -8,8 +8,7 @@ class TodoResult : ArrayList<TodoResultItem?>()
 @Entity(tableName = "todos")
 data class TodoResultItem(
     val completed: Boolean?,
-    @PrimaryKey(autoGenerate = true)
-    val id: Int? = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String?,
     val userId: Int?
 )

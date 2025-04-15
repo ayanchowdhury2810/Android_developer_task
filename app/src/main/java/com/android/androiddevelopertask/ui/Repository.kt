@@ -8,11 +8,9 @@ import com.android.androiddevelopertask.retrofit.ApiService
 import org.json.JSONObject
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val apiService: ApiService
-//, private val dao: TodoDao
-) {
+class Repository @Inject constructor(private val apiService: ApiService, private val dao: TodoDao) {
 
-//    val allTodos = dao.getAllNotes()
+    val allTodos = dao.getAllNotes()
 
     suspend fun getTodos(): TodoResult? {
         return try {
@@ -37,11 +35,15 @@ class Repository @Inject constructor(private val apiService: ApiService
         }
     }
 
-//    suspend fun insert(note: TodoResultItem){
-//        dao.insert(note)
-//    }
-//
-//    suspend fun delete(note: TodoResultItem){
-//        dao.delete(note)
-//    }
+    suspend fun insert(note: TodoResultItem){
+        dao.insert(note)
+    }
+
+    suspend fun delete(note: TodoResultItem){
+        dao.delete(note)
+    }
+
+    suspend fun update(note: TodoResultItem){
+        dao.update(note)
+    }
 }

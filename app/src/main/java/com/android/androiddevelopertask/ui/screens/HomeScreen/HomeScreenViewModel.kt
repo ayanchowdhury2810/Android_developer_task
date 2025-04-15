@@ -25,7 +25,10 @@ class HomeScreenViewModel @Inject constructor(
     private var _todoResult = MutableLiveData<Resource<TodoResult>>()
     val todoResult : LiveData<Resource<TodoResult>> = _todoResult
 
-//    val todos = repository.allTodos.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+    private var _editData = MutableLiveData<TodoResultItem?>()
+    val editData : LiveData<TodoResultItem?> = _editData
+
+    val todos = repository.allTodos.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     fun getTodoData(){
         viewModelScope.launch(Dispatchers.IO) {
@@ -39,16 +42,30 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-//    fun addNote(content: String) {
-//        viewModelScope.launch {
-//            repository.insert(TodoResultItem(title = content, completed = false, userId = null))
-//        }
-//    }
-//
-//    fun deleteNote(note: String) {
-//        viewModelScope.launch {
-//            repository.delete(TodoResultItem(title = note, completed = false, userId = null))
-//        }
-//    }
+    fun getEditData(note: TodoResultItem){
+        _editData.value = note
+    }
+
+    fun clearEditData(){
+        _editData.value = null
+    }
+
+    fun addNote(content: String) {
+        viewModelScope.launch {
+            repository.insert(TodoResultItem(title = content, completed = false, userId = null))
+        }
+    }
+
+    fun deleteNote(todo: TodoResultItem) {
+        viewModelScope.launch {
+            repository.delete(todo)
+        }
+    }
+
+    fun updateNote(title: String, id: Int) {
+        viewModelScope.launch {
+            repository.update(TodoResultItem(title = title, completed = false, userId = null, id = id))
+        }
+    }
 
 }
