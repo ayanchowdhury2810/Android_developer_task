@@ -10,5 +10,8 @@ data class TodoResultItem(
     val completed: Boolean?,
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String?,
-    val userId: Int?
+    val userId: Int?,
+    val description: String? = null,
+    val startTimeMillis: Long?,
+    val recurrenceIntervalMillis: Long? = null
 )

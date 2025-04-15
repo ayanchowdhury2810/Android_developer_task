@@ -11,7 +11,7 @@ class AndroidDeveloperTaskApplication : Application() {
         Log.d(TAG, "Starting here")
     }
 
-    companion object{
+    companion object {
         const val TAG = "AndroidDeveloperTaskApplication"
     }
 }
